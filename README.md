@@ -50,7 +50,34 @@ Built entirely with free tools. No subscriptions. No servers. No manual data ent
                                           ┌─────────▼─────────┐
                                           │   Google Sheets   │
                                           │   (Data Storage)  │
-                                          └───────────────────┘
+                                          └─────────┬─────────┘
+                                                    │
+                          ┌─────────────────────────┘
+                          │
+          ╔═══════════════▼══════════════════════════════════╗
+          ║           OPTIONAL — INSIGHTS LAYER              ║
+          ║                                                  ║
+          ║   ┌─────────────────┐     ┌──────────────────┐  ║
+          ║   │  Personal       │     │  Google Sheets   │  ║
+          ║   │  Context Doc    │────▶│  Journal Log     │  ║
+          ║   │  (Background    │     │  (All Entries)   │  ║
+          ║   │   about you)    │     └────────┬─────────┘  ║
+          ║   └─────────────────┘              │            ║
+          ║                                    │            ║
+          ║                          ┌─────────▼─────────┐  ║
+          ║                          │   Gemini Gem      │  ║
+          ║                          │  (Custom AI       │  ║
+          ║                          │   Persona with    │  ║
+          ║                          │   Slash Commands) │  ║
+          ║                          └─────────┬─────────┘  ║
+          ║                                    │            ║
+          ║                          ┌─────────▼─────────┐  ║
+          ║                          │  Conversational   │  ║
+          ║                          │  Insights         │  ║
+          ║                          │  /mood /patterns  │  ║
+          ║                          │  /wins /growth    │  ║
+          ║                          └───────────────────┘  ║
+          ╚══════════════════════════════════════════════════╝
 ```
 
 ### Layer by Layer
