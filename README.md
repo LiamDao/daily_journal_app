@@ -2,6 +2,7 @@
 
 Turn your daily commute into a structured, searchable record of your life — completely free.
 
+If you want to build your own journaling app, follow the instructions in [Setup Guide](./SETUP.md) *(~45 minutes setup, $0 Cost)*
 ---
 
 ## What It Does
@@ -134,7 +135,7 @@ exposed through this app.
 ## Setup
 
 Full step-by-step setup instructions are available in the
-[Setup Guide](./SETUP.md) *(coming soon)* or follow the in-app credential screen
+[Setup Guide](./SETUP.md)  or follow the in-app credential screen
 on first launch.
 
 **What you need:**
