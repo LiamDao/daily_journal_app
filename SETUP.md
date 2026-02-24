@@ -1087,7 +1087,7 @@ Click **Save** to publish your Gem. Try these to get started:
 
 **📈 Review monthly** — Once a month ask your Gem for a `/summary last month`. Patterns that are invisible day to day become very clear over longer windows.
 
-**🔄 Refresh your Gem** — Re-link your Sheet in the Gem's Knowledge section every few weeks so it always has your most recent entries.
+**🔄 Refresh your Gem** — Make sure to connect your Journal Log Google Sheet via Google Drive such that it stays up to date.
 
 **🔒 Your data is private** — Your Google Sheet is private to your Google account. Your Gem is private to your Google account. Nothing you log is visible to anyone else.
 
