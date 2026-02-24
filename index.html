@@ -23,6 +23,84 @@
       padding: 24px 20px;
     }
 
+    /* SETUP SCREEN */
+    #setupScreen {
+      background: radial-gradient(ellipse at 50% 40%, #1e1e3a 0%, #0f0f1a 70%);
+      justify-content: flex-start;
+      padding-top: 60px;
+      overflow-y: auto;
+    }
+    .setup-title {
+      font-size: clamp(28px, 8vw, 44px);
+      font-weight: 700;
+      margin-bottom: 10px;
+      text-align: center;
+    }
+    .setup-subtitle {
+      font-size: clamp(15px, 4vw, 20px);
+      color: rgba(255,255,255,0.4);
+      text-align: center;
+      line-height: 1.6;
+      margin-bottom: 40px;
+      max-width: 500px;
+    }
+    .setup-form {
+      width: 100%;
+      max-width: 560px;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      padding-bottom: 40px;
+    }
+    .field-label {
+      font-size: clamp(14px, 3.5vw, 17px);
+      color: rgba(255,255,255,0.6);
+      margin-bottom: 8px;
+      font-weight: 600;
+      letter-spacing: 0.3px;
+    }
+    .field-hint {
+      font-size: clamp(12px, 3vw, 14px);
+      color: rgba(255,255,255,0.3);
+      margin-bottom: 10px;
+      line-height: 1.5;
+    }
+    .field-input {
+      width: 100%;
+      padding: clamp(16px, 4vw, 20px);
+      border-radius: 16px;
+      border: 1px solid rgba(255,255,255,0.15);
+      background: rgba(255,255,255,0.06);
+      color: #fff;
+      font-size: clamp(14px, 3.5vw, 17px);
+      outline: none;
+      transition: border-color 0.2s;
+      font-family: inherit;
+    }
+    .field-input:focus { border-color: rgba(102,126,234,0.7); }
+    .field-input::placeholder { color: rgba(255,255,255,0.2); }
+    .setup-btn {
+      width: 100%;
+      padding: clamp(20px, 5.5vw, 26px);
+      border-radius: 20px;
+      border: none;
+      background: linear-gradient(135deg, #667eea, #764ba2);
+      color: white;
+      font-size: clamp(20px, 5.5vw, 26px);
+      font-weight: 700;
+      cursor: pointer;
+      margin-top: 8px;
+      transition: opacity 0.2s, transform 0.15s;
+    }
+    .setup-btn:active { transform: scale(0.98); opacity: 0.9; }
+    .setup-note {
+      font-size: clamp(12px, 3vw, 14px);
+      color: rgba(255,255,255,0.25);
+      text-align: center;
+      line-height: 1.6;
+      margin-top: 4px;
+    }
+
     /* IDLE */
     #idleScreen { background: radial-gradient(ellipse at 50% 40%, #1e1e3a 0%, #0f0f1a 70%); }
     .journal-title { font-size: clamp(36px, 11vw, 64px); font-weight: 700; margin-bottom: 10px; }
@@ -65,6 +143,17 @@
     }
     .mic-btn:active { transform: scale(0.94); }
     .idle-hint { font-size: clamp(20px, 5.5vw, 28px); color: rgba(255,255,255,0.4); text-align: center; line-height: 1.6; }
+    .settings-link {
+      position: fixed;
+      bottom: 28px;
+      right: 24px;
+      font-size: clamp(12px, 3vw, 14px);
+      color: rgba(255,255,255,0.2);
+      cursor: pointer;
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .settings-link:hover { color: rgba(255,255,255,0.5); }
 
     /* RECORDING */
     #recordingScreen { background: radial-gradient(ellipse at 50% 40%, #2a0a1a 0%, #0f0f1a 70%); }
@@ -163,6 +252,26 @@
 </head>
 <body>
 
+  <!-- SETUP -->
+  <div class="screen" id="setupScreen">
+    <div class="setup-title">📓 Welcome</div>
+    <div class="setup-subtitle">Enter your credentials once to get started.<br>They are saved privately on this device only.</div>
+    <div class="setup-form">
+      <div>
+        <div class="field-label">Apps Script URL</div>
+        <div class="field-hint">Your Google Apps Script deployment URL — starts with https://script.google.com/...</div>
+        <input class="field-input" id="urlInput" type="url" placeholder="https://script.google.com/macros/s/..." />
+      </div>
+      <div>
+        <div class="field-label">Secret Token</div>
+        <div class="field-hint">The secret token you set in your Apps Script Code.gs file</div>
+        <input class="field-input" id="tokenInput" type="password" placeholder="Your secret token" />
+      </div>
+      <button class="setup-btn" onclick="saveSetup()">Save & Get Started</button>
+      <div class="setup-note">These values are stored locally on your device and never sent anywhere except your own Apps Script endpoint.</div>
+    </div>
+  </div>
+
   <!-- IDLE -->
   <div class="screen" id="idleScreen">
     <div class="journal-title">📓 Daily Journal</div>
@@ -171,6 +280,7 @@
       <button class="mic-btn" onclick="startRecording()">🎙️</button>
     </div>
     <div class="idle-hint">Tap the mic and talk<br>about your day</div>
+    <span class="settings-link" onclick="openSetup()">⚙️ settings</span>
   </div>
 
   <!-- RECORDING -->
@@ -216,9 +326,6 @@
   <div class="error-bar" id="errorBar"></div>
 
   <script>
-    const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbyntbeSdFTopxXxb0lnqEp6bnc4_-RKsBMLQruPiyCDBF_knCEoSoUPRRvN8TlfHrpx3Q/exec';
-    const SECRET_TOKEN    = 'jhaskfghbvdjvbvkut__htkuebfkjeb_LD';
-
     let recognition;
     let isRecording = false;
     let transcript  = '';
@@ -226,8 +333,40 @@
     let seconds     = 0;
     let wakeLock    = null;
 
+    // Load credentials from localStorage
+    let APPS_SCRIPT_URL = localStorage.getItem('journal_url')   || '';
+    let SECRET_TOKEN    = localStorage.getItem('journal_token') || '';
+
     document.getElementById('todayDate').textContent =
       new Date().toLocaleDateString('en-US', { weekday: 'long', month: 'long', day: 'numeric' });
+
+    function init() {
+      if (!APPS_SCRIPT_URL || !SECRET_TOKEN) {
+        showScreen('setupScreen');
+      } else {
+        showScreen('idleScreen');
+      }
+    }
+
+    function saveSetup() {
+      const url   = document.getElementById('urlInput').value.trim();
+      const token = document.getElementById('tokenInput').value.trim();
+      if (!url || !token) {
+        showError('Please fill in both fields before continuing.');
+        return;
+      }
+      localStorage.setItem('journal_url',   url);
+      localStorage.setItem('journal_token', token);
+      APPS_SCRIPT_URL = url;
+      SECRET_TOKEN    = token;
+      showScreen('idleScreen');
+    }
+
+    function openSetup() {
+      document.getElementById('urlInput').value   = APPS_SCRIPT_URL;
+      document.getElementById('tokenInput').value = SECRET_TOKEN;
+      showScreen('setupScreen');
+    }
 
     function showScreen(id) {
       document.querySelectorAll('.screen').forEach(s => s.style.display = 'none');
@@ -358,7 +497,7 @@
       document.getElementById('errorBar').style.display = 'none';
     }
 
-    showScreen('idleScreen');
+    init();
   </script>
 </body>
 </html>
