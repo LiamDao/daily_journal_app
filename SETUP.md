@@ -19,6 +19,26 @@ that step.
 
 ---
 
+## What You Will Be Collecting
+
+Throughout this setup you will generate several important values that you need to keep
+track of. Before you start, open a notes app — Apple Notes, Google Keep, Notion, or
+anything you have handy — and save each item as you go.
+
+By the end of setup you will have collected:
+
+| Item | Where You Get It | What It Looks Like |
+|------|-----------------|-------------------|
+| 📊 **Sheet ID** | Google Sheets URL | Long string of letters and numbers |
+| 🔑 **Gemini API Key** | Google AI Studio | Long string of random characters |
+| 🔒 **Secret Token** | You make this up | Any long random string you create |
+| 🌐 **Apps Script URL** | Google Apps Script | Starts with https://script.google.com/... |
+| 📱 **GitHub Pages URL** | GitHub Settings | Starts with https://yourusername.github.io/... |
+
+> 💡 Do not skip saving these as you go. Some of them — like your API key — are only
+> shown once and cannot be retrieved later. A notes app is fine. A password manager
+> is even better.
+
 ## Overview
 
 Here is the full picture of what you are building before you start:
