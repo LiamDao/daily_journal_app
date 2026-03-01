@@ -187,7 +187,7 @@ about two minutes to set up.
 
 &nbsp;
 
-# Part 4 — Create Your Secret Token
+# Part 4 — Create Your Secret Token (Self-Created, "Personal Password")
 
 A secret token is a password that protects your journal from anyone else writing to it.
 You make this up yourself — it can be any combination of letters and numbers.
