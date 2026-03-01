@@ -449,12 +449,13 @@ GitHub will host the front end of your journal — the screen you see on your ph
 
 &nbsp;
 ```html
-
-
-
-  
-  
-  Daily Journal
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Daily Journal</title>
+  <style>
   
     * { box-sizing: border-box; margin: 0; padding: 0; }
     html, body { height: 100%; width: 100%; overflow: hidden; }
@@ -871,6 +872,9 @@ GitHub will host the front end of your journal — the screen you see on your ph
     }
 
     init();
+  </script>
+</body>
+</html>
   
 
 
