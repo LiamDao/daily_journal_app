@@ -283,19 +283,19 @@ Transcript:
 
 Return this exact JSON structure:
 {
-  "moodScore": ,
-  "moodDescriptor": "",
-  "energyLevel": ,
-  "stressLevel": ,
+  "moodScore": <number 1-10>,
+  "moodDescriptor": "<one word>",
+  "energyLevel": <number 1-10>,
+  "stressLevel": <number 1-10>,
   "keyThemes": "<2-3 main themes separated by commas>",
-  "wins": "",
-  "challenges": "",
-  "peopleMentioned": "",
-  "followUp": "",
-  "gratitude": "",
-  "oneLineSummary": "",
+  "wins": "<wins or highlights from the day>",
+  "challenges": "<challenges or frustrations mentioned>",
+  "peopleMentioned": "<names of people mentioned, comma separated>",
+  "followUp": "<anything to follow up on or carry into tomorrow>",
+  "gratitude": "<one gratitude moment or positive thing>",
+  "oneLineSummary": "<one sentence summary of the day>",
   "workVsPersonal": "<e.g. 70% work / 30% personal>",
-  "wordCount": 
+  "wordCount": <number of words in the transcript>
 }
 
 If something is not mentioned, use "N/A" for strings and make a reasonable inference for numbers based on context.
