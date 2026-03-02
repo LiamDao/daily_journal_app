@@ -456,7 +456,6 @@ GitHub will host the front end of your journal — the screen you see on your ph
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <title>Daily Journal</title>
   <style>
-  
     * { box-sizing: border-box; margin: 0; padding: 0; }
     html, body { height: 100%; width: 100%; overflow: hidden; }
     body {
@@ -464,6 +463,7 @@ GitHub will host the front end of your journal — the screen you see on your ph
       background: #0f0f1a;
       color: #fff;
     }
+
     .screen {
       position: fixed;
       inset: 0;
@@ -474,34 +474,83 @@ GitHub will host the front end of your journal — the screen you see on your ph
       padding: 24px 20px;
     }
 
-    /* SETUP */
+    /* SETUP SCREEN */
     #setupScreen {
       background: radial-gradient(ellipse at 50% 40%, #1e1e3a 0%, #0f0f1a 70%);
       justify-content: flex-start;
       padding-top: 60px;
       overflow-y: auto;
     }
-    .setup-title { font-size: clamp(28px, 8vw, 44px); font-weight: 700; margin-bottom: 10px; text-align: center; }
-    .setup-subtitle { font-size: clamp(15px, 4vw, 20px); color: rgba(255,255,255,0.4); text-align: center; line-height: 1.6; margin-bottom: 40px; max-width: 500px; }
-    .setup-form { width: 100%; max-width: 560px; display: flex; flex-direction: column; gap: 20px; padding-bottom: 40px; }
-    .field-label { font-size: clamp(14px, 3.5vw, 17px); color: rgba(255,255,255,0.6); margin-bottom: 8px; font-weight: 600; }
-    .field-hint { font-size: clamp(12px, 3vw, 14px); color: rgba(255,255,255,0.3); margin-bottom: 10px; line-height: 1.5; }
+    .setup-title {
+      font-size: clamp(28px, 8vw, 44px);
+      font-weight: 700;
+      margin-bottom: 10px;
+      text-align: center;
+    }
+    .setup-subtitle {
+      font-size: clamp(15px, 4vw, 20px);
+      color: rgba(255,255,255,0.4);
+      text-align: center;
+      line-height: 1.6;
+      margin-bottom: 40px;
+      max-width: 500px;
+    }
+    .setup-form {
+      width: 100%;
+      max-width: 560px;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      padding-bottom: 40px;
+    }
+    .field-label {
+      font-size: clamp(14px, 3.5vw, 17px);
+      color: rgba(255,255,255,0.6);
+      margin-bottom: 8px;
+      font-weight: 600;
+      letter-spacing: 0.3px;
+    }
+    .field-hint {
+      font-size: clamp(12px, 3vw, 14px);
+      color: rgba(255,255,255,0.3);
+      margin-bottom: 10px;
+      line-height: 1.5;
+    }
     .field-input {
-      width: 100%; padding: clamp(16px, 4vw, 20px); border-radius: 16px;
-      border: 1px solid rgba(255,255,255,0.15); background: rgba(255,255,255,0.06);
-      color: #fff; font-size: clamp(14px, 3.5vw, 17px); outline: none;
-      transition: border-color 0.2s; font-family: inherit;
+      width: 100%;
+      padding: clamp(16px, 4vw, 20px);
+      border-radius: 16px;
+      border: 1px solid rgba(255,255,255,0.15);
+      background: rgba(255,255,255,0.06);
+      color: #fff;
+      font-size: clamp(14px, 3.5vw, 17px);
+      outline: none;
+      transition: border-color 0.2s;
+      font-family: inherit;
     }
     .field-input:focus { border-color: rgba(102,126,234,0.7); }
     .field-input::placeholder { color: rgba(255,255,255,0.2); }
     .setup-btn {
-      width: 100%; padding: clamp(20px, 5.5vw, 26px); border-radius: 20px; border: none;
+      width: 100%;
+      padding: clamp(20px, 5.5vw, 26px);
+      border-radius: 20px;
+      border: none;
       background: linear-gradient(135deg, #667eea, #764ba2);
-      color: white; font-size: clamp(20px, 5.5vw, 26px); font-weight: 700;
-      cursor: pointer; margin-top: 8px; transition: opacity 0.2s, transform 0.15s;
+      color: white;
+      font-size: clamp(20px, 5.5vw, 26px);
+      font-weight: 700;
+      cursor: pointer;
+      margin-top: 8px;
+      transition: opacity 0.2s, transform 0.15s;
     }
     .setup-btn:active { transform: scale(0.98); opacity: 0.9; }
-    .setup-note { font-size: clamp(12px, 3vw, 14px); color: rgba(255,255,255,0.25); text-align: center; line-height: 1.6; margin-top: 4px; }
+    .setup-note {
+      font-size: clamp(12px, 3vw, 14px);
+      color: rgba(255,255,255,0.25);
+      text-align: center;
+      line-height: 1.6;
+      margin-top: 4px;
+    }
 
     /* IDLE */
     #idleScreen { background: radial-gradient(ellipse at 50% 40%, #1e1e3a 0%, #0f0f1a 70%); }
@@ -514,26 +563,46 @@ GitHub will host the front end of your journal — the screen you see on your ph
       margin-bottom: 52px;
     }
     .mic-ring::before {
-      content: ''; position: absolute; inset: -10px; border-radius: 50%;
+      content: '';
+      position: absolute;
+      inset: -10px;
+      border-radius: 50%;
       background: conic-gradient(#667eea, #764ba2, #f093fb, #667eea);
-      animation: spin 4s linear infinite; opacity: 0.7;
+      animation: spin 4s linear infinite;
+      opacity: 0.7;
     }
     .mic-ring::after {
-      content: ''; position: absolute; inset: -5px;
-      border-radius: 50%; background: #0f0f1a;
+      content: '';
+      position: absolute;
+      inset: -5px;
+      border-radius: 50%;
+      background: #0f0f1a;
     }
     .mic-btn {
-      position: absolute; inset: 0; z-index: 1; border-radius: 50%; border: none;
+      position: absolute;
+      inset: 0;
+      z-index: 1;
+      border-radius: 50%;
+      border: none;
       background: linear-gradient(135deg, #667eea, #764ba2);
-      color: white; font-size: clamp(60px, 16vw, 100px);
-      cursor: pointer; width: 100%; height: 100%; transition: transform 0.15s ease;
+      color: white;
+      font-size: clamp(60px, 16vw, 100px);
+      cursor: pointer;
+      width: 100%;
+      height: 100%;
+      transition: transform 0.15s ease;
     }
     .mic-btn:active { transform: scale(0.94); }
     .idle-hint { font-size: clamp(20px, 5.5vw, 28px); color: rgba(255,255,255,0.4); text-align: center; line-height: 1.6; }
     .settings-link {
-      position: fixed; bottom: 28px; right: 24px;
-      font-size: clamp(12px, 3vw, 14px); color: rgba(255,255,255,0.2);
-      cursor: pointer; transition: color 0.2s;
+      position: fixed;
+      bottom: 28px;
+      right: 24px;
+      font-size: clamp(12px, 3vw, 14px);
+      color: rgba(255,255,255,0.2);
+      cursor: pointer;
+      text-decoration: none;
+      transition: color 0.2s;
     }
     .settings-link:hover { color: rgba(255,255,255,0.5); }
 
@@ -630,84 +699,84 @@ GitHub will host the front end of your journal — the screen you see on your ph
       0%, 100% { box-shadow: 0 0 0 0 rgba(245,87,108,0.4); }
       50%       { box-shadow: 0 0 0 24px rgba(245,87,108,0); }
     }
-  
+  </style>
+</head>
+<body>
 
+  <!-- SETUP -->
+  <div class="screen" id="setupScreen">
+    <div class="setup-title">📓 Welcome</div>
+    <div class="setup-subtitle">Enter your credentials once to get started.<br>They are saved privately on this device only.</div>
+    <div class="setup-form">
+      <div>
+        <div class="field-label">Apps Script URL</div>
+        <div class="field-hint">Your Google Apps Script deployment URL — starts with https://script.google.com/...</div>
+        <input class="field-input" id="urlInput" type="url" placeholder="https://script.google.com/macros/s/..." />
+      </div>
+      <div>
+        <div class="field-label">Secret Token</div>
+        <div class="field-hint">The secret token you set in your Apps Script Code.gs file</div>
+        <input class="field-input" id="tokenInput" type="password" placeholder="Your secret token" />
+      </div>
+      <button class="setup-btn" onclick="saveSetup()">Save & Get Started</button>
+      <div class="setup-note">These values are stored locally on your device and never sent anywhere except your own Apps Script endpoint.</div>
+    </div>
+  </div>
 
+  <!-- IDLE -->
+  <div class="screen" id="idleScreen">
+    <div class="journal-title">📓 Daily Journal</div>
+    <div class="journal-date" id="todayDate"></div>
+    <div class="mic-ring">
+      <button class="mic-btn" onclick="startRecording()">🎙️</button>
+    </div>
+    <div class="idle-hint">Tap the mic and talk<br>about your day</div>
+    <span class="settings-link" onclick="openSetup()">⚙️ settings</span>
+  </div>
 
-  
-  
-    📓 Welcome
-    Enter your credentials once to get started.They are saved privately on this device only.
-    
-      
-        Apps Script URL
-        Your Google Apps Script deployment URL — starts with https://script.google.com/...
-        
-      
-      
-        Secret Token
-        The secret token you chose during setup
-        
-      
-      Save & Get Started
-      These values are stored locally on your device and never appear in the source code.
-    
-  
+  <!-- RECORDING -->
+  <div class="screen" id="recordingScreen">
+    <div class="rec-indicator">
+      <div class="rec-dot"></div>
+      <div class="rec-label">Recording</div>
+    </div>
+    <div class="timer-display" id="timerDisplay">00:00</div>
+    <div class="live-transcript" id="liveTranscript">
+      <span class="interim">Listening...</span>
+    </div>
+    <button class="stop-btn" onclick="stopRecording()">⏹️</button>
+  </div>
 
-  
-  
-    📓 Daily Journal
-    
-    
-      🎙️
-    
-    Tap the mic and talkabout your day
-    ⚙️ settings
-  
+  <!-- REVIEW -->
+  <div class="screen" id="reviewScreen">
+    <div class="review-title">Review Your Entry</div>
+    <div class="review-subtitle">Looks good? Save it and let Gemini do the rest.</div>
+    <div class="transcript-preview" id="transcriptPreview"></div>
+    <div class="review-actions">
+      <button class="save-btn" id="saveBtn" onclick="submitJournal()">✨ Synthesize & Save</button>
+      <button class="retry-btn" onclick="resetToIdle()">Start Over</button>
+    </div>
+  </div>
 
-  
-  
-    
-      
-      Recording
-    
-    00:00
-    
-      Listening...
-    
-    ⏹️
-  
+  <!-- PROCESSING -->
+  <div class="screen" id="processingScreen">
+    <div class="spinner"></div>
+    <div class="processing-label">Synthesizing your day...</div>
+    <div class="processing-sub">Gemini is reading between the lines</div>
+  </div>
 
-  
-  
-    Review Your Entry
-    Looks good? Save it and let Gemini do the rest.
-    
-    
-      ✨ Synthesize & Save
-      Start Over
-    
-  
+  <!-- SUCCESS -->
+  <div class="screen" id="successScreen">
+    <div class="success-icon">✅</div>
+    <div class="success-title">Entry Saved</div>
+    <div class="success-sub">Your day has been logged<br>and structured automatically</div>
+    <button class="done-btn" onclick="resetToIdle()">Done</button>
+  </div>
 
-  
-  
-    
-    Synthesizing your day...
-    Gemini is reading between the lines
-  
+  <!-- ERROR -->
+  <div class="error-bar" id="errorBar"></div>
 
-  
-  
-    ✅
-    Entry Saved
-    Your day has been loggedand structured automatically
-    Done
-  
-
-  
-  
-
-  
+  <script>
     let recognition;
     let isRecording = false;
     let transcript  = '';
@@ -715,6 +784,7 @@ GitHub will host the front end of your journal — the screen you see on your ph
     let seconds     = 0;
     let wakeLock    = null;
 
+    // Load credentials from localStorage
     let APPS_SCRIPT_URL = localStorage.getItem('journal_url')   || '';
     let SECRET_TOKEN    = localStorage.getItem('journal_token') || '';
 
@@ -775,19 +845,23 @@ GitHub will host the front end of your journal — the screen you see on your ph
           : 'Could not access microphone: ' + err.message);
         return;
       }
+
       if (!('webkitSpeechRecognition' in window) && !('SpeechRecognition' in window)) {
         showError('Speech recognition not supported. Use Chrome on Android or Safari on iPhone.');
         return;
       }
+
       await requestWakeLock();
       transcript = '';
       showScreen('recordingScreen');
-      document.getElementById('liveTranscript').innerHTML = 'Listening...';
+      document.getElementById('liveTranscript').innerHTML = '<span class="interim">Listening...</span>';
+
       const SR = window.SpeechRecognition || window.webkitSpeechRecognition;
       recognition = new SR();
       recognition.continuous     = true;
       recognition.interimResults = true;
       recognition.lang           = 'en-US';
+
       recognition.onresult = (e) => {
         let final = '', interim = '';
         for (let i = e.resultIndex; i < e.results.length; i++) {
@@ -796,14 +870,16 @@ GitHub will host the front end of your journal — the screen you see on your ph
         }
         transcript += final;
         document.getElementById('liveTranscript').innerHTML =
-          transcript + (interim ? '' + interim + '' : '');
+          transcript + (interim ? '<span class="interim">' + interim + '</span>' : '');
       };
+
       recognition.onerror = (e) => {
         if (e.error !== 'no-speech') { showError('Microphone error: ' + e.error); stopRecording(); }
       };
       recognition.onend = () => { if (isRecording) recognition.start(); };
       recognition.start();
       isRecording = true;
+
       seconds = 0;
       timerInterval = setInterval(() => {
         seconds++;
@@ -832,6 +908,7 @@ GitHub will host the front end of your journal — the screen you see on your ph
       const saveBtn = document.getElementById('saveBtn');
       saveBtn.disabled = true;
       showScreen('processingScreen');
+
       try {
         const response = await fetch(APPS_SCRIPT_URL, {
           method: 'POST',
@@ -856,7 +933,7 @@ GitHub will host the front end of your journal — the screen you see on your ph
       transcript = '';
       seconds    = 0;
       document.getElementById('timerDisplay').textContent = '00:00';
-      document.getElementById('liveTranscript').innerHTML = 'Listening...';
+      document.getElementById('liveTranscript').innerHTML = '<span class="interim">Listening...</span>';
       hideError();
       showScreen('idleScreen');
     }
@@ -875,9 +952,6 @@ GitHub will host the front end of your journal — the screen you see on your ph
   </script>
 </body>
 </html>
-  
-
-
 ```
 
 </details>
